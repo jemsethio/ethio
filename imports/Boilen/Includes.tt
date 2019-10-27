@@ -1,0 +1,57 @@
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ import namespace="System.IO" #>
+<#
+GlobalSettings.SilverlightSymbol = "SILVERLIGHT";
+GlobalSettings.FreezableSubNamespace = "Phone.Internal";
+GlobalSettings.ValidationSubNamespace = "WeatherSpark.Data";
+#>
+<#+
+[TemplateType] struct T { }
+[TemplateType] struct T1 { }
+[TemplateType] struct T2 { }
+[TemplateType] struct TKey { }
+[TemplateType] struct TItem { }
+
+[TemplateType( "EmperialApps.WeatherSpark.Data" )] struct Pair<T1,T2> { }
+[TemplateType( "EmperialApps.WeatherSpark.Data" )] struct Coordinate { }
+[TemplateType( "EmperialApps.WeatherSpark.Data" )] struct Place { }
+[TemplateType( "EmperialApps.WeatherSpark.Data" )] class Forecast { }
+[TemplateType( "EmperialApps.WeatherSpark.Data" )] class DataValues { }
+[TemplateType( "EmperialApps.WeatherSpark.Data" )] class Scale { }
+[TemplateType( "EmperialApps.WeatherSpark.Data" )] abstract class ItemManager<TItem> { }
+[TemplateType( "EmperialApps.WeatherSpark.Data" )] abstract class DownloadEventArgs<TKey, TItem> { }
+[TemplateType( "EmperialApps.WeatherSpark.Data" )] class ForecastManager { }
+[TemplateType( "EmperialApps.WeatherSpark.Data" )] interface IForecastStore { }
+[TemplateType( "EmperialApps.WeatherSpark.Data" )] interface ITimer { }
+[TemplateType( "EmperialApps.WeatherSpark.Data" )] enum Units { }
+[TemplateType( "EmperialApps.WeatherSpark.Data" )] sealed class LocationManager { }
+[TemplateType( "EmperialApps.WeatherSpark.Data" )] interface ILocationScheduler { }
+[TemplateType( "EmperialApps.WeatherSpark.Data" )] interface ILocationStore { }
+[TemplateType( "EmperialApps.WeatherSpark.Data" )] enum ForecastDisplayLevel { }
+[TemplateType( "EmperialApps.WeatherSpark.Data" )] enum ForecastDisplayMode { }
+[TemplateType( "EmperialApps.WeatherSpark.Data" )] enum ForecastTileMode { }
+[TemplateType( "EmperialApps.WeatherSpark.Data" )] enum ForecastSourceId { }
+[TemplateType( "EmperialApps.WeatherSpark.Data" )] struct ForecastInfo { }
+
+[TemplateType( "EmperialApps.WeatherSpark" )] class ForecastPage { }
+[TemplateType( "EmperialApps.WeatherSpark" )] class WeatherControl { }
+[TemplateType( "EmperialApps.WeatherSpark" )] class WeatherGraph { }
+[TemplateType( "EmperialApps.WeatherSpark" )] class DisplaySelector { }
+[TemplateType( "EmperialApps.WeatherSpark" )] class ForecastDisplaySelector { }
+[TemplateType( "EmperialApps.WeatherSpark" )] sealed class LocationSettings { }
+[TemplateType( "EmperialApps.WeatherSpark" )] sealed class SearchStatus { }
+
+[TemplateType( "EmperialApps.WeatherSpark.Agent" )] class TileImageBase { }
+
+static class PublicPartial {
+    public static PartialType Type<T>( Type baseClass = null ) {
+        GlobalSettings.ValidationSubNamespace = "Phone.Internal";
+        PartialType type =
+            baseClass == null
+                ? Partial.Type<T>( )
+                : Partial.Type<T>( baseClass );
+        type.InsertText( InsertionPoint.BeforeTypeDeclaration, "public " );
+        return type;
+    }
+}
+#>
